@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
@@ -48,4 +49,10 @@ Route::get('/dashboard/transactions/{id}', [DashboardTransactionController::clas
 Route::get('/dashboard/settings', [DashboardSettingController::class, 'store'])->name('dashboard-settings-store');
 Route::get('/dashboard/account', [DashboardSettingController::class, 'account'])->name('dashboard-settings-account');
 
+Route::prefix('admin')->namespace('Admin')->middleware([])->group(function () {
+  Route::get('/', [AdminDashboardController::class, 'index'])->name('admin-dashboard');
+});
+
 Auth::routes();
+
+//'auth', 'admin'
