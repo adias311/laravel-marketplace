@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\ProductGalleryController as AdminProductGalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
@@ -49,8 +53,12 @@ Route::get('/dashboard/transactions/{id}', [DashboardTransactionController::clas
 Route::get('/dashboard/settings', [DashboardSettingController::class, 'store'])->name('dashboard-settings-store');
 Route::get('/dashboard/account', [DashboardSettingController::class, 'account'])->name('dashboard-settings-account');
 
-Route::prefix('admin')->namespace('Admin')->middleware([])->group(function () {
+Route::prefix('admin')->middleware([])->group(function () {
   Route::get('/', [AdminDashboardController::class, 'index'])->name('admin-dashboard');
+  Route::resource('category', AdminCategoryController::class);
+  Route::resource('user', AdminUserController::class);
+  Route::resource('product', AdminProductController::class);
+  Route::resource('product-gallery', AdminProductGalleryController::class);
 });
 
 Auth::routes();
