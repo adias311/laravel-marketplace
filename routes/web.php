@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\DashboardTransactionController;
@@ -32,12 +33,17 @@ use App\Http\Controllers\DashboardSettingController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+Route::get('/categories/{id}', [CategoryController::class, 'detail'])->name('categories-detail');
 
-Route::get('/detail/{id}', [DetailController::class, 'index'])->name('detail');
+Route::get('/details/{id}', [DetailController::class, 'index'])->name('detail');
+Route::post('/details/{id}', [DetailController::class, 'add'])->name('detail-add');
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::get('/cart', [CartController::class, 'index'])->name('cart')->middleware('auth');
+Route::delete('/cart/{id}', [CartController::class, 'delete'])->name('cart-delete');
 Route::get('/success', [CartController::class, 'success'])->name('success');
 
+Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout');
+Route::post('/checkout/callback', [CheckoutController::class, 'callback'])->name('midtrans-callback');
 
 Route::get('/register/success', [RegisterController::class, 'success'])->name('register-success');
 

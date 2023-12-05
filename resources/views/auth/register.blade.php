@@ -177,7 +177,7 @@
         methods: {
             checkForEmailAvailability: function () {
                 var self = this;
-                axios.get('{{ route('api-register-check') }}', {
+                axios.get('{{ route('api-register-check') }}' , {
                         params: {
                             email: this.email
                         }

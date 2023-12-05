@@ -141,10 +141,10 @@ Store Detail Page
     data: {
       activePhoto: 0,
       photos: [
-        @foreach($product-> galleries as $gallery) {
+        @foreach($product->galleries as $gallery) {
           id: {
             {
-              $gallery-> id
+              $gallery->id
             }
           },
           url: "{{ Storage::url($gallery->photos) }}",
