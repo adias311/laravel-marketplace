@@ -106,41 +106,39 @@ Account Settings
 <script src="https://unpkg.com/vue-toasted"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-  var locations = new Vue({
-    el: "#locations",
-    mounted() {
-      this.getProvincesData();
-    },
-    data: {
-      provinces: null,
-      regencies: null,
-      provinces_id: null,
-      regencies_id: null,
-    },
-    methods: {
-      getProvincesData() {
-        var self = this;
-        axios.get('{{ route('
-            api - provinces ') }}')
-          .then(function(response) {
-            self.provinces = response.data;
-          })
-      },
-      getRegenciesData() {
-        var self = this;
-        axios.get('{{ url('
-            api / regencies ') }}/' + self.provinces_id)
-          .then(function(response) {
-            self.regencies = response.data;
-          })
-      },
-    },
-    watch: {
-      provinces_id: function(val, oldVal) {
-        this.regencies_id = null;
-        this.getRegenciesData();
-      },
-    }
-  });
-</script>
+      var locations = new Vue({
+        el: "#locations",
+        mounted() {
+          this.getProvincesData();
+        },
+        data: {
+          provinces: null,
+          regencies: null,
+          provinces_id: null,
+          regencies_id: null,
+        },
+        methods: {
+          getProvincesData() {
+            var self = this;
+            axios.get('{{ route('api-provinces') }}')
+              .then(function (response) {
+                  self.provinces = response.data;
+              })
+          },
+          getRegenciesData() {
+            var self = this;
+            axios.get('{{ url('api/regencies') }}/' + self.provinces_id)
+              .then(function (response) {
+                  self.regencies = response.data;
+              })
+          },
+        },
+        watch: {
+          provinces_id: function (val, oldVal) {
+            this.regencies_id = null;
+            this.getRegenciesData();
+          },
+        }
+      });
+    </script>
 @endpush

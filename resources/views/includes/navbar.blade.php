@@ -36,7 +36,7 @@
                         Hi, {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('dashboard') }}" class="dropdown-item">Dashboard</a>
+                        <a href="{{ Auth::user()->roles == 'ADMIN' ? route('admin-dashboard') : route('dashboard') }}" class="dropdown-item">Dashboard</a>
                         <a href="{{ route('dashboard-settings-account') }}" class="dropdown-item">
                             Settings
                         </a>
